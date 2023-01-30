@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,13 +82,13 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'social_network', 
-        'USER': 'social_network', 
-        'PASSWORD': 'social_network1234',
-        'HOST': '172.18.0.2', 
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'), 
         'PORT': '5432',
         'TEST': {
-            'NAME': 'somedb',
+            'NAME': 'testdb',
         },
     },
 }
