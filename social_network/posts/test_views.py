@@ -17,7 +17,7 @@ class RegistrationViewTest(APITestCase):
         }
         request = self.factory.post(reverse('register'), data)
         view = RegisterView.as_view()
-        response = view(request)        
+        response = view(request)
         self.assertEqual(response.status_code, 200)
 
         self.assertEqual(User.objects.count(), 1)
