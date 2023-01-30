@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: social_network
+      POSTGRES_DB: social_network
+      POSTGRES_PASSWORD: social_network1234
+    volumes:
+      - pgdata:/var/lib/posgresql/data
+  zuri:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./social_network:/social_network
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+volumes:
+  pgdata:
