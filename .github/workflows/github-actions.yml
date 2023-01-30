@@ -33,10 +33,10 @@ jobs:
           pip install -r requirements.txt
       - name: Run PyLint
         run: pylint --rcfile=.pylintrc --ignore=migrations social_network/posts/
-      - name: Change directory
-        run: cd social_network
       - name: Run tests
-        run: python manage.py test
+        run: |
+          cd social_network
+          python manage.py test
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     steps:
