@@ -74,7 +74,7 @@ class PostCreationView(APIView):
         if not user:
             raise AuthenticationFailed("User not found!")
 
-        post_data = request.data
+        post_data = request.data.copy()
         post_data['user'] = user.id
 
         serializer = PostSerializer(data=post_data)
@@ -83,6 +83,14 @@ class PostCreationView(APIView):
 
         return Response(serializer.data)
 
+
+class PostsView(APIView):
+    def get(self, request: Request) -> Response:
+        authorization_header = request.headers.get('Authorization')
+        handle_token(authorization_header)
+
+        posts = Posts.objects.all().values()
+        return Response(list(posts))
 
 class LikesView(APIView):
     def post(self, request: Request, *args: tuple, **kwargs: dict) -> Response:

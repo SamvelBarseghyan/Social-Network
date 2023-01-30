@@ -1,11 +1,12 @@
 from django.urls import path
 from .views import ( RegisterView, LoginView, PostCreationView,
-                     LikesView, AnaliticsView, UserAnaliticsView )
+                     LikesView, AnaliticsView, UserAnaliticsView, PostsView)
 
 urlpatterns = [
     path('register', RegisterView.as_view(), name='register'),
     path('login', LoginView.as_view(), name='login'),
     path('post', PostCreationView.as_view(), name='post_creation'),
+    path('posts', PostsView.as_view(), name='posts'),
     path(
         'posts/<int:post_id>/action/<str:action_type>',
         LikesView.as_view(),
